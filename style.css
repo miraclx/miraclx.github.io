@@ -1,0 +1,48 @@
+:root {
+  --accent: #1f3a5f;
+  --text:   #1a2332;
+  --muted:  #555555;
+  --bg:     #fbfbfa;
+  --rule:   #e6e6e3;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 46rem; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .12s; }
+a:hover { border-bottom-color: var(--accent); }
+
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.01em; color: var(--accent); margin: 0 0 .3rem; }
+.role   { font-weight: 600; color: var(--accent); margin: 0 0 .5rem; }
+.thesis { font-style: italic; color: var(--muted); margin: 0 0 1rem; }
+
+.contact { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; font-size: .9rem; }
+.contact .loc { color: var(--muted); }
+
+.lede { margin: 2rem 0; font-size: 1.05rem; }
+
+h2 {
+  font-size: .95rem; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--accent); font-weight: 700;
+  margin: 2.5rem 0 .5rem; padding-bottom: .4rem; border-bottom: 1px solid var(--rule);
+}
+article { margin: 1.4rem 0; }
+h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .3rem; }
+h3 .meta { font-size: .8rem; font-weight: 400; color: var(--muted); margin-left: .5rem; }
+article p { margin: 0; }
+
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 480px) {
+  main { padding: 2.5rem 1.2rem 4rem; }
+  h1 { font-size: 1.7rem; }
+}

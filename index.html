@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miraculous Owonubi — Senior Rust Engineer</title>
+<meta name="description" content="Senior Rust engineer: distributed systems, P2P networking, protocol. Builder of theia; ex-NEAR core, Calimero engineering lead.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="intro">
+    <h1>Miraculous Owonubi</h1>
+    <p class="role">Senior Rust Engineer · Distributed Systems, P2P Networking, Protocol</p>
+    <p class="thesis">I build the infrastructure other engineers depend on. Correctness first, cleverness never.</p>
+    <nav class="contact">
+      <a href="mailto:omiraculous@gmail.com">omiraculous@gmail.com</a>
+      <a href="https://github.com/miraclx">GitHub</a>
+      <a href="https://www.linkedin.com/in/miraclx">LinkedIn</a>
+      <a href="https://github.com/miraclx/resume/releases/latest/download/Miraculous-Owonubi-Resume.pdf">Résumé (PDF)</a>
+      <span class="loc">Remote · GMT+1</span>
+    </nav>
+  </header>
+
+  <section class="lede">
+    <p>I design and build systems software in Rust — overlay networks, custom transports, storage engines, and protocol internals. Currently independent, building <a href="https://github.com/theia-hq">theia</a>; before that, engineering lead at Calimero and a core engineer at NEAR.</p>
+  </section>
+
+  <section>
+    <h2>Selected work</h2>
+
+    <article>
+      <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
+      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. I generalized the transport behind a single trait — it runs on iroh or on a QUIC-style UDP transport I wrote from scratch — and proved the two substitutable under one conformance suite that <strong>ships decoy transports, so it can't pass by accident</strong>. On top of that: capability auth where the key <em>is</em> the identity (offline-verifiable, replay-safe at compile time), and keyless SSH, file transfer, and link measurement behind one CLI.</p>
+    </article>
+
+    <article>
+      <h3>NEAR <span class="meta">core &amp; developer tools</span></h3>
+      <p>80+ merged PRs across <a href="https://github.com/near/nearcore">nearcore</a> (the 2.6k-star reference client). Sole author and maintainer of the Rust NEAR JSON-RPC client; codeowner of <a href="https://github.com/near/near-sdk-rs">near-sdk-rs</a> (authored the NearSchema derive); introduced contract ABIs; found and documented BOS platform exploits.</p>
+    </article>
+
+    <article>
+      <h3>Calimero <span class="meta">engineering lead</span></h3>
+      <p>Drove the protocol from a transactional model to an eventually-consistent design and authored the spec paper that was adopted and implemented. Led the node's overhaul from monolithic to an actor model, built recursive state sync, and wrote a paper on end-to-end encryption for dynamic groups.</p>
+    </article>
+
+    <article>
+      <h3>Open source <span class="meta">tools &amp; contributions</span></h3>
+      <p><a href="https://github.com/miraclx/freyr-js">freyr</a> — a music-downloader CLI, 2.3k stars. Merged contributions to <a href="https://github.com/tarkah/tickrs">tickrs</a>, Apache Arrow, rustyline, and dialoguer.</p>
+    </article>
+  </section>
+
+  <footer>
+    <p>Based in Nigeria, working remote (GMT+1). <a href="mailto:omiraculous@gmail.com">omiraculous@gmail.com</a></p>
+  </footer>
+</main>
+</body>
+</html>
