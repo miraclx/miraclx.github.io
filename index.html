@@ -43,12 +43,13 @@
 
     <article>
       <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
-      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. I generalized the transport behind a single trait: it runs on iroh or on a QUIC-style UDP transport I wrote from scratch, proven substitutable under one conformance suite that <strong>ships decoy transports, so it can't pass by accident</strong>. On top: keyless SSH, file transfer, and link measurement, all behind one CLI.</p>
+      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. I generalized the transport behind a single trait: it runs on iroh or on a QUIC-style UDP transport I wrote from scratch, proven substitutable under one conformance suite that <strong>ships decoy transports, so it can't pass by accident</strong>. It's built as a stack of small Rust crates, each earning its own boundary:</p>
       <ul class="crates">
-        <li><a href="https://github.com/theia-hq/bifrost">bifrost</a>: the transport substrate. One trait every transport implements (iroh, or my from-scratch QUIC-style UDP), kept honest by a conformance suite that ships decoy transports so it can't pass vacuously. <span class="dir">Where it's going: encryption as a composable Noise layer over any transport, and more "radios" under one trait.</span></li>
-        <li><a href="https://github.com/theia-hq/nauthy">nauthy</a>: capability auth where the key <em>is</em> the identity. Offline-verifiable against a single held key, no coordinator; attenuable, expiring, revocable; a single-use admission witness with compile-time replay-safety.</li>
-        <li><a href="https://github.com/theia-hq/tightbeam">tightbeam</a>: a capability-gated stream aimed at exactly one public key. A nauthy capability opens a directed tunnel to one peer, nothing broadcast.</li>
-        <li><a href="https://github.com/theia-hq/swoosh">swoosh</a>: one CLI for everything the overlay can do, under a single <code>beam</code> verb.</li>
+        <li><a href="https://github.com/theia-hq/bifrost">bifrost</a> (reach): open a byte-stream to a machine by its public key, across NATs, over any transport. You address who a peer is, not where.</li>
+        <li><a href="https://github.com/theia-hq/nauthy">nauthy</a> (the gate): capability tokens rooted at one ed25519 key you hold, verified offline with no server and no PKI; attenuable, expiring, revocable.</li>
+        <li><a href="https://github.com/theia-hq/tightbeam">tightbeam</a> (the tunnel): a gated byte-stream to a named service on a peer, addressed by key, composing bifrost's reach with nauthy's gate. A directed beam to one peer, never a broadcast.</li>
+        <li><a href="https://github.com/theia-hq/services">services</a> (the engines): fetch, measure, sshh (keyless SSH), and transfer, each doing one job on an already-admitted stream.</li>
+        <li><a href="https://github.com/theia-hq/swoosh">swoosh</a> (the product): one CLI where reach, the gate, and the services become one tool. ssh in, send files, forward ports, fetch through a peer, share access, all by public key, no IPs, no servers.</li>
       </ul>
     </article>
 
@@ -70,7 +71,7 @@
 
   <section>
     <h2>Approach</h2>
-    <p>Correctness first, cleverness never. I make illegal states unrepresentable and write tests that can't lie; restraint is the senior signal, the boring right tool beats the impressive wrong one. I reimplement hard things from scratch to understand them, then measure against the best that already exists. What pulls me is the substrate, the layer everything else stands on, and the frontier where systems, protocol, and cryptography meet: addressing machines by identity instead of location, and mechanisms where the honest path is the profitable one.</p>
+    <p>I build systems where control sits with the person using them, not with a company in the middle. My work in the theia-hq overlay starts from a simple inversion: your identity should be a key you hold, not a row in someone's database, so there is no account to register, no dashboard to suspend, and nothing anyone can deplatform. I reach for the smallest design that makes the illegal states unrepresentable, which sometimes means writing a layer from scratch to understand it and then deliberately not shipping it as a product. I care about naming things plainly, letting each piece earn its own boundary, and writing so a stranger understands what a thing is before they know its history. The test I hold work to is whether it still answers to you when the vendor, the server, and the network in the middle are all gone.</p>
   </section>
 
   <footer>
