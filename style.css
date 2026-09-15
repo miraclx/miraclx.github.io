@@ -5,6 +5,16 @@
   --bg:     #fbfbfa;
   --rule:   #e6e6e3;
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #86a9d6;
+    --text:   #e7e9ee;
+    --muted:  #9aa1ab;
+    --bg:     #14171c;
+    --rule:   #2a2f38;
+  }
+}
+
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -39,6 +49,8 @@ article { margin: 1.4rem 0; }
 h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 .3rem; }
 h3 .meta { font-size: .8rem; font-weight: 400; color: var(--muted); margin-left: .5rem; }
 article p { margin: 0; }
+.sub { margin: .5rem 0 0 !important; font-size: .92rem; color: var(--muted); }
+.sub em { font-style: normal; color: var(--text); }
 
 footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .9rem; }
 

@@ -3,8 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Miraculous Owonubi — Senior Rust Engineer</title>
+<title>Miraculous Owonubi · Senior Rust Engineer</title>
 <meta name="description" content="Senior Rust engineer: distributed systems, P2P networking, protocol. Builder of theia; ex-NEAR core, Calimero engineering lead.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Miraculous Owonubi · Senior Rust Engineer">
+<meta property="og:description" content="Systems software in Rust: overlay networks, custom transports, storage engines, protocol internals. Builder of theia; ex-NEAR core, Calimero engineering lead.">
+<meta property="og:url" content="https://miraclx.github.io/">
+<meta property="og:site_name" content="Miraculous Owonubi">
+<meta name="twitter:card" content="summary">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +35,7 @@
   </header>
 
   <section class="lede">
-    <p>I design and build systems software in Rust — overlay networks, custom transports, storage engines, and protocol internals. Currently independent, building <a href="https://github.com/theia-hq">theia</a>; before that, engineering lead at Calimero and a core engineer at NEAR.</p>
+    <p>I design and build systems software in Rust: overlay networks, custom transports, storage engines, and protocol internals. Currently independent, building <a href="https://github.com/theia-hq">theia</a>; before that, engineering lead at Calimero and a core engineer at NEAR.</p>
   </section>
 
   <section>
@@ -34,7 +43,8 @@
 
     <article>
       <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
-      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. I generalized the transport behind a single trait — it runs on iroh or on a QUIC-style UDP transport I wrote from scratch — and proved the two substitutable under one conformance suite that <strong>ships decoy transports, so it can't pass by accident</strong>. On top of that: capability auth where the key <em>is</em> the identity (offline-verifiable, replay-safe at compile time), and keyless SSH, file transfer, and link measurement behind one CLI.</p>
+      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. I generalized the transport behind a single trait: it runs on iroh or on a QUIC-style UDP transport I wrote from scratch, proven substitutable under one conformance suite that <strong>ships decoy transports, so it can't pass by accident</strong>. On top of that: capability auth where the key <em>is</em> the identity (offline-verifiable, replay-safe at compile time), and keyless SSH, file transfer, and link measurement behind one CLI.</p>
+      <p class="sub">A family of Rust crates: <em>bifrost</em> (the transport trait + conformance suite), <em>nauthy</em> (capability auth on biscuit and ed25519), <em>tightbeam</em> (capability-gated tunnels), and <em>swoosh</em> (the CLI that ties it together).</p>
     </article>
 
     <article>
@@ -49,7 +59,7 @@
 
     <article>
       <h3>Open source <span class="meta">tools &amp; contributions</span></h3>
-      <p><a href="https://github.com/miraclx/freyr-js">freyr</a> — a music-downloader CLI, 2.3k stars. Merged contributions to <a href="https://github.com/tarkah/tickrs">tickrs</a>, Apache Arrow, rustyline, and dialoguer.</p>
+      <p><a href="https://github.com/miraclx/freyr-js">freyr</a>, a music-downloader CLI (2.3k stars, 15k+ Docker pulls), plus a Rust utility stack: <em>xget-rs</em> (chunked, resumable fetch over a pluggable byte source), <em>xprogress-rs</em> (composited progress bars), <em>xbytes-rs</em>, and <em>freyr-gui</em>. Merged contributions to <a href="https://github.com/tarkah/tickrs">tickrs</a>, Apache Arrow, rustyline, and dialoguer.</p>
     </article>
   </section>
 
