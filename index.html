@@ -4,19 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Miraculous Owonubi · Senior Rust Engineer</title>
-<meta name="description" content="Senior Rust engineer: distributed systems, P2P networking, protocol. Builder of theia; ex-NEAR core, Calimero engineering lead.">
+<meta name="description" content="Senior Rust engineer: distributed systems, P2P networking, protocol. Core engineer at NEAR, engineering lead at Calimero; building theia.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Miraculous Owonubi · Senior Rust Engineer">
-<meta property="og:description" content="Systems software in Rust: overlay networks, custom transports, storage engines, protocol internals. Builder of theia; ex-NEAR core, Calimero engineering lead.">
+<meta property="og:description" content="Systems software in Rust: overlay networks, custom transports, storage engines, protocol internals. Core engineer at NEAR, engineering lead at Calimero; building theia.">
 <meta property="og:url" content="https://miraclx.github.io/">
 <meta property="og:site_name" content="Miraculous Owonubi">
 <meta name="twitter:card" content="summary">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,32 +31,32 @@
   </header>
 
   <section class="lede">
-    <p>I design and build systems software in Rust: overlay networks, custom transports, storage engines, and protocol internals. Currently independent, building <a href="https://github.com/theia-hq">theia</a>; before that, engineering lead at Calimero and a core engineer at NEAR.</p>
+    <p>I design and build systems software in Rust: overlay networks, custom transports, storage engines, and protocol internals. I was a core engineer at <a href="https://github.com/near/nearcore">NEAR</a> and engineering lead at Calimero; I am now independent, building <a href="https://github.com/theia-hq">theia</a>.</p>
   </section>
 
   <section>
     <h2>Selected work</h2>
 
     <article>
-      <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
-      <p>A public-key-addressed, control-plane-free peer-to-peer overlay I architected and built solo. Reach any machine by its ed25519 identity, across NATs, with no address, account, or server in between. theia isn't tied to any one network: iroh is one transport, <a href="https://github.com/theia-hq/quirk">quirk</a> (a QUIC-style UDP stack I wrote from scratch) is another, and by design it reaches a key over any medium that can carry a stream, from UDP today to non-IP radios like BLE, Wi-Fi HaLow, and Thread. An adversarial <a href="https://github.com/theia-hq/bifrost">conformance suite</a> keeps every implementation honest: a transport that lies about who it reaches is rejected, and a reference transport it must pass keeps the interface from overfitting to iroh. It's a stack of small Rust crates:</p>
-      <ul class="crates">
-        <li><a href="https://github.com/theia-hq/bifrost">bifrost</a> (reach): open a byte-stream to a machine by its public key, across NATs, over any transport. You address who a peer is, not where.</li>
-        <li><a href="https://github.com/theia-hq/nauthy">nauthy</a> (the gate): capability tokens rooted at one ed25519 key you hold, verified offline with no server and no PKI; attenuable, expiring, revocable.</li>
-        <li><a href="https://github.com/theia-hq/tightbeam">tightbeam</a> (the tunnel): a gated byte-stream to a named service on a peer, addressed by key, composing bifrost's reach with nauthy's gate. A directed beam to one peer, never a broadcast.</li>
-        <li><a href="https://github.com/theia-hq/services">services</a> (the engines): pluggable units injected into the overlay, fetch, measure, sshh (keyless SSH), and transfer, each doing one job on an already-admitted stream.</li>
-        <li><a href="https://github.com/theia-hq/swoosh">swoosh</a> (the product): the composable presentation, one CLI that binds reach, the gate, and the pluggable services into a single tool. ssh in, send files, forward ports, fetch through a peer, share access, all by public key, no IPs, no servers.</li>
-      </ul>
-    </article>
-
-    <article>
       <h3>NEAR <span class="meta">core &amp; developer tools</span></h3>
-      <p>80+ merged PRs across <a href="https://github.com/near/nearcore">nearcore</a> (the 2.6k-star reference client). Sole author and maintainer of the Rust NEAR JSON-RPC client; codeowner of <a href="https://github.com/near/near-sdk-rs">near-sdk-rs</a> (authored the NearSchema derive); introduced contract ABIs; found and documented BOS platform exploits.</p>
+      <p>80+ merged PRs across <a href="https://github.com/near/nearcore">nearcore</a> (the 2.6k-star reference client). Sole author and maintainer of the <a href="https://github.com/near/near-jsonrpc-client-rs">Rust NEAR JSON-RPC client</a> (dominant contributor, 176 commits to the next person's 30); top contributor to <a href="https://github.com/near/near-sdk-rs">near-sdk-rs</a> (authored the NearSchema derive); introduced contract ABIs; found and documented BOS platform exploits.</p>
     </article>
 
     <article>
       <h3>Calimero <span class="meta">engineering lead</span></h3>
       <p>Drove the protocol from a transactional model to an eventually-consistent design and authored the spec paper that was adopted and implemented. Led the node's overhaul from monolithic to an actor model, built recursive state sync, and wrote a paper on end-to-end encryption for dynamic groups.</p>
+    </article>
+
+    <article>
+      <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
+      <p>A public-key-addressed peer-to-peer overlay and services layer I architected and built. You reach a machine by its ed25519 key instead of its address, and every service behind that reach is gated by a capability rooted in the same key, verified offline with no coordinator. The networking underneath is pluggable: iroh today (its hole-punching does the NAT traversal) and <a href="https://github.com/theia-hq/quirk">quirk</a>, a UDP stack I wrote from scratch to understand how a modern transport works; by design the reach layer extends to a purpose-built transport per medium (Bluetooth and other non-IP radios), which is a goal, not yet built. A shared <a href="https://github.com/theia-hq/bifrost">conformance suite</a> holds every transport to one identity contract: a transport that misattributes who it reached is rejected, and a reference transport each must pass keeps the interface from overfitting to iroh. It's a stack of small Rust crates:</p>
+      <ul class="crates">
+        <li><a href="https://github.com/theia-hq/bifrost">bifrost</a> (reach): opens a byte-stream to a machine named only by its ed25519 key, carried over a swappable transport. Finding the peer across NATs is the transport's job (iroh's hole-punching); you address who a peer is, not where.</li>
+        <li><a href="https://github.com/theia-hq/nauthy">nauthy</a> (the gate): one ed25519 key mints, narrows, delegates, and revokes capability tokens, each verified offline with no coordinator, rooted in the key a transport handshake already proved. Attenuable, expiring, and revocable through a denylist the node checks at admission.</li>
+        <li><a href="https://github.com/theia-hq/tightbeam">tightbeam</a> (the tunnel): publishes your local services by name behind the gate, runs a short handshake that selects one and confirms admission before a byte flows, then hands back a plain two-way stream, so any program speaking a TCP port or Unix socket rides it unchanged.</li>
+        <li><a href="https://github.com/theia-hq/services">services</a> (the engines): standalone units, fetch, measure, sshh (keyless SSH), and transfer, that each do one job on an already-admitted stream, embeddable one at a time.</li>
+        <li><a href="https://github.com/theia-hq/swoosh">swoosh</a> (the product): one CLI that binds the layers into human verbs, ssh in, send files, forward ports, fetch through a peer, hand out revocable access, all by public key, no IPs or servers in the middle.</li>
+      </ul>
     </article>
 
     <article>
@@ -78,7 +75,7 @@
   </section>
 
   <footer>
-    <p>Based in Nigeria, working remote (GMT+1). <a href="mailto:omiraculous@gmail.com">omiraculous@gmail.com</a></p>
+    <p>Working remote (GMT+1). <a href="mailto:omiraculous@gmail.com">omiraculous@gmail.com</a></p>
   </footer>
 </main>
 </body>
