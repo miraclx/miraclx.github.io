@@ -20,7 +20,7 @@
 <main>
   <header class="intro">
     <h1>Miraculous Owonubi</h1>
-    <p class="role">Senior Rust Engineer · Distributed Systems, P2P Networking, Protocol</p>
+    <p class="role">Systems engineer · Rust · networking, runtimes, distributed state</p>
     <nav class="contact">
       <a href="mailto:omiraculous@gmail.com">omiraculous@gmail.com</a>
       <a href="https://github.com/miraclx">GitHub</a>
@@ -31,46 +31,49 @@
   </header>
 
   <section class="lede">
-    <p>I design and build systems software in Rust: overlay networks, custom transports, storage engines, and protocol internals. I was a core engineer at <a href="https://github.com/near/nearcore">NEAR</a> and engineering lead at Calimero; I am now independent, building <a href="https://github.com/theia-hq">theia</a>.</p>
+    <p>I build systems in Rust, usually after taking one apart to see how it works. A protocol I prototyped at a hackathon became <a href="https://github.com/calimero-network/core">Calimero</a>'s platform, and I led the engineering team that shipped it. Before that I was a core engineer at <a href="https://github.com/near/nearcore">NEAR</a>. Now I'm building <a href="https://github.com/theia-hq">theia</a>: reach a machine by its public key and hand out access one service at a time.</p>
   </section>
 
   <section>
     <h2>Selected work</h2>
 
     <article>
-      <h3>NEAR <span class="meta">core &amp; developer tools</span></h3>
-      <p>I was a core engineer working across <a href="https://github.com/near/nearcore">protocol internals</a>, the Rust SDK, contract ABIs and developer tooling. I helped introduce <a href="https://github.com/near/near-sdk-rs/pull/893">contract ABI generation and embedding</a>, authoring the NearSchema derive and working on <a href="https://github.com/near/cargo-near/pull/74">versioned serialization at the SDK/build-tool dynamic-library boundary</a>. I also created and was principal author of the <a href="https://github.com/near/near-jsonrpc-client-rs">Rust JSON-RPC client</a>, and found and documented BOS platform exploits.</p>
-    </article>
-
-    <article>
       <h3><a href="https://github.com/calimero-network/core">Calimero</a> <span class="meta">engineering lead</span></h3>
-      <p>My internal-hackathon protocol prototype became Calimero's P2P application platform: Wasm apps running on users' own nodes, with encrypted shared state synchronized between them. I designed both generations, a transactional prototype designed for strong consistency and an eventually consistent CRDT-based redesign, and authored the adopted specification. I built the core networking, state/storage and recursive synchronization layers, plus the <a href="https://github.com/calimero-network/core/pull/12">Wasmer-based application runtime foundation and guest SDK</a>. App developers worked with familiar data structures while the platform handled replication underneath. I led the whole engineering team, mentored engineers learning Rust and reviewed most of what shipped.</p>
+      <p><strong>A hackathon prototype of mine became the company's platform.</strong> Calimero runs sandboxed application logic on users' own nodes, with encrypted shared state kept in sync over a P2P network. I designed both generations of the protocol, first a transactional prototype and then an eventually consistent CRDT-based redesign, and wrote the specification the company adopted. I built the networking, state storage and recursive sync layers, plus the <a href="https://github.com/calimero-network/core/pull/12">Wasmer-based runtime foundation and guest SDK</a>, so app developers could use familiar data structures while replication happened underneath. Then I led the whole engineering team, most of them new to Rust, and reviewed most of what shipped.</p>
     </article>
 
     <article>
-      <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">Rust · P2P overlay + services</span></h3>
-      <p>A public-key-addressed P2P overlay and service layer I architected and built, for SSH, file transfer, port forwarding and fetching web content through another device. You reach a peer by its ed25519 key instead of its address, and every service behind that reach is gated by a capability rooted in the same key, verified offline without a central authorization service. Access is given per service, can expire on a date, and is taken back at the host: a revoke ends an open session, ssh included, in under a second, and leaves everyone else connected. The networking underneath is pluggable: iroh today (its hole-punching does the NAT traversal) and <a href="https://github.com/theia-hq/quirk">quirk</a>, a UDP stack I wrote from scratch to understand how a modern transport works; by design the reach layer extends to a purpose-built transport per medium (Bluetooth and other non-IP radios), which is a goal, not yet built. A shared <a href="https://github.com/theia-hq/bifrost">conformance suite</a> tests every transport against the same identity contract, rejecting implementations that misattribute the peer they reached. An independent reference transport keeps the interface from overfitting to iroh. It's a stack of small Rust crates:</p>
-      <ul class="crates">
-        <li><a href="https://github.com/theia-hq/bifrost">bifrost</a> (reach): opens a byte-stream to a machine named only by its ed25519 key, carried over a swappable transport. Finding the peer across NATs is the transport's job (iroh's hole-punching); you address who a peer is, not where.</li>
-        <li><a href="https://github.com/theia-hq/nauthy">nauthy</a> (the gate): one ed25519 key mints, narrows, delegates, and revokes capability tokens, each verified offline with no coordinator, rooted in the key a transport handshake already proved. Attenuable, expiring, and revocable through a denylist the node checks at admission.</li>
-        <li><a href="https://github.com/theia-hq/tightbeam">tightbeam</a> (the tunnel): publishes your local services by name behind the gate, runs a short handshake that selects one and confirms admission before a byte flows, then hands back a plain two-way stream, so any program speaking a TCP port or Unix socket rides it unchanged.</li>
-        <li><a href="https://github.com/theia-hq/services">services</a> (the engines): standalone units, fetch, measure, sshh (keyless SSH), and transfer, that each do one job on an already-admitted stream, embeddable one at a time.</li>
-        <li><a href="https://github.com/theia-hq/swoosh">swoosh</a> (the product): one CLI that binds the layers into human verbs, ssh in, send files, forward ports, fetch through a peer, hand out revocable access, all by public key, with no IP addresses to manage.</li>
-      </ul>
+      <h3>NEAR <span class="meta">core engineer</span></h3>
+      <p><strong>I was brought in for engineering rigour.</strong> Account IDs were plain strings, validated only at the points someone remembered to check. I led the move to a typed <a href="https://github.com/near/nearcore/pull/4440">AccountId</a> that is parsed once and valid from then on (it later became <a href="https://github.com/near/near-account-id-rs">its own crate</a>), and the stricter type surfaced invalid values already sitting in live network state. An internal test client I built grew into NEAR's standard <a href="https://github.com/near/near-jsonrpc-client-rs">Rust JSON-RPC client</a>. I built <a href="https://github.com/near/nearcore/pull/5724">Themis</a>, the compliance checks every crate in the repository has to pass. Then I maintained both sides of the contract runtime boundary, the node's VM interface and the guest side in the Rust SDK, where I helped introduce <a href="https://github.com/near/near-sdk-rs/pull/893">contract ABIs</a> and wrote the NearSchema derive. I also hunted down and documented exploits in the BOS platform. I follow a problem to its logical conclusion.</p>
     </article>
 
     <article>
-      <h3>Open source <span class="meta">tools &amp; contributions</span></h3>
-      <ul class="crates">
-        <li><a href="https://github.com/miraclx/freyr-js">freyr</a>: a music-downloader CLI (Spotify, Apple Music, Deezer), 2.3k stars and 42k+ Docker pulls.</li>
-        <li>Merged upstream contributions to <a href="https://github.com/tarkah/tickrs">tickrs</a>, Apache Arrow, rustyline, and dialoguer.</li>
-      </ul>
+      <h3><a href="https://github.com/theia-hq">theia</a> <span class="meta">what I'm building now</span></h3>
+      <p><strong>SSH into a machine, send it files, forward a port or fetch through it, knowing only its public key.</strong> No account and no addresses to manage. The host decides who gets which service and until when, and taking access back ends an open session in under a second. Access is a capability rooted in the same key and checked offline. The transport underneath is swappable: iroh today, next to <a href="https://github.com/theia-hq/quirk">a UDP transport I wrote from scratch</a>, with one conformance suite holding both to the same identity contract. I've designed and am now implementing QUIC over mixed IP and non-IP links, so nearby machines can keep working together over whatever link they share.</p>
+      <p>It's a stack of small crates: <a href="https://github.com/theia-hq/bifrost">bifrost</a> (reach), <a href="https://github.com/theia-hq/nauthy">nauthy</a> (capabilities), <a href="https://github.com/theia-hq/tightbeam">tightbeam</a> (tunnels), <a href="https://github.com/theia-hq/services">services</a> (ssh, transfer, fetch, measure) and <a href="https://github.com/theia-hq/swoosh">swoosh</a>, the one CLI on top.</p>
     </article>
   </section>
 
   <section>
+    <h2>Explorations</h2>
+    <p>I explore just past the edge of what I know, and I experiment all the time. Some of these shipped. Some only ever existed to answer a question.</p>
+    <ul class="crates">
+      <li><a href="https://github.com/theia-hq/quirk">quirk</a>: a QUIC-shaped transport from scratch over UDP, to learn what a modern transport actually has to do. Not for production, on purpose.</li>
+      <li>Process continuity: what does it take to move a running process to another machine and have it carry on? Memory on demand with userfaultfd is the easy part; open handles, storage and ordering are where it gets interesting. Ongoing.</li>
+      <li>Next up: sandboxing experiments.</li>
+      <li><a href="https://github.com/theia-hq/qat">qat</a>: a throwaway box on a CI runner that you SSH into by public key, gone when its timer runs out.</li>
+      <li><a href="https://github.com/miraclx/xget-rs">xget</a>: a chunked, parallel, resumable, verified fetch engine over a pluggable byte source.</li>
+      <li><a href="https://github.com/miraclx/janus">janus</a>: a reverse proxy written in Rust, running as a Cloudflare Worker.</li>
+      <li><a href="https://github.com/miraclx/zy">zy</a>: a minimal static file server in Rust.</li>
+      <li><a href="https://github.com/miraclx/cryptographic-experiments">cryptographic experiments</a>, and a long tail of smaller ones on <a href="https://github.com/miraclx">GitHub</a> and <a href="https://crates.io/users/miraclx">crates.io</a>.</li>
+      <li><a href="https://github.com/miraclx/freyr-js">freyr</a>: the one that got away from me. A music downloader with 2.3k stars and 42k+ Docker pulls.</li>
+    </ul>
+    <p>I've been writing Rust since just before 1.0. Before that it was Arch Linux, kernel modules and FUSE filesystems as a teenager, mostly to see how things worked. Along the way: merged contributions to <a href="https://github.com/tarkah/tickrs">tickrs</a>, Apache Arrow, rustyline and dialoguer.</p>
+  </section>
+
+  <section>
     <h2>Approach</h2>
-    <p>I look for problems just beyond what I know how to solve. Even a failed experiment can expose a constraint and lead to a better design. Performance matters, but so do elegance and intuitiveness: the machinery should be fast without making the person using it carry all its complexity. With theia, I want nearby machines to keep working together over a local link rather than depend on public infrastructure. Identity and access stay under the hosts' control, and I want the system to remain useful when you have to run every piece yourself.</p>
+    <p>I look for problems just past what I know how to solve, and I'd rather run the experiment than argue about it. Fast matters, and so do elegant and intuitive: the machinery should do the hard part so the person using it doesn't have to.</p>
   </section>
 
   <footer>
